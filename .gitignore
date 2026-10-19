@@ -1,0 +1,26 @@
+*.class
+
+# Файлы пакетов (JAR, WAR, EAR и т.д.)
+*.jar
+*.war
+*.ear
+*.nar
+
+# Каталоги сборки (для Maven и Gradle)
+target/
+out/
+build/
+.gradle/
+
+# Файлы IDE
+.idea/
+*.iml
+*.iws
+.classpath
+.project
+.settings/
+
+# Системные и временные файлы
+*.log
+*.tmp
+*.bak
