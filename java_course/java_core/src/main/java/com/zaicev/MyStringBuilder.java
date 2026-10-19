@@ -1,11 +1,10 @@
 package com.zaicev;
 
-import java.util.Arrays;
 import java.util.Stack;
 
 public class MyStringBuilder {
 
-    private Stack<Memento> history;
+    private final Stack<Memento> history;
 
     private static final char[] EMPTY_VALUE = new char[0];
 
@@ -14,10 +13,10 @@ public class MyStringBuilder {
         save(EMPTY_VALUE);
     }
 
-    public MyStringBuilder(char[] value) {
+    public MyStringBuilder(String value) {
         this.history = new Stack<>();
         save(EMPTY_VALUE);
-        save(value);
+        save(value.toCharArray());
     }
 
     public MyStringBuilder append(char symbol) {

@@ -37,5 +37,8 @@ public class Main {
 
         System.out.println(testMessage);
 
+        MyStringBuilder test = new MyStringBuilder("123");
+        test.append('!');
+        System.out.println(test);
     }
 }
