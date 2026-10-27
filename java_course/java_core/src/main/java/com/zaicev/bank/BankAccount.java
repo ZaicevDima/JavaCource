@@ -1,13 +1,17 @@
 package com.zaicev.bank;
 
+import java.util.UUID;
+
 public class BankAccount {
 
+    private final UUID accountId;
     private int balance;
 
     public BankAccount(int balance) {
         if (balance < 0) {
             throw new IllegalArgumentException("Initial balance must be positive");
         }
+        this.accountId = UUID.randomUUID();
         this.balance = balance;
     }
 
@@ -32,5 +36,9 @@ public class BankAccount {
 
     public synchronized int getBalance() {
         return balance;
+    }
+
+    public UUID getAccountId() {
+        return accountId;
     }
 }

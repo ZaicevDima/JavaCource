@@ -3,12 +3,10 @@ package com.zaicev.bank;
 import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.locks.ReentrantLock;
 
 public class ConcurrentBank {
 
     private final Set<BankAccount> bankAccountList = ConcurrentHashMap.newKeySet();
-    private final ReentrantLock transferLock = new ReentrantLock();
 
     public BankAccount createAccount(int countingMoney) {
         BankAccount account = new BankAccount(countingMoney);
@@ -34,13 +32,14 @@ public class ConcurrentBank {
             throw new IllegalArgumentException("Both accounts must belong to this bank");
         }
 
-        transferLock.lock();
+        BankAccount first = (account1.getAccountId().compareTo(account2.getAccountId())) < 0 ? account1 : account2;
+        BankAccount second = first == account1 ? account2 : account1;
 
-        try {
-            account1.withdraw(countingMoney);
-            account2.deposit(countingMoney);
-        } finally {
-            transferLock.unlock();
+        synchronized (first) {
+            synchronized (second) {
+                account1.withdraw(countingMoney);
+                account2.deposit(countingMoney);
+            }
         }
     }
 
